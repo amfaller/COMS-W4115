@@ -57,30 +57,32 @@ class State(Enum):
     # Error state
     ERROR = 25
 
+class Transitions:
     # Table representing state transitions
-    transitionTable = []
+    #transitionTable = None
+    
+    # Initialization
+    def __init__(self):
+        self.transitionTable = None
     
     # Function to load the CSV table representing state transitions
     # This table has states in the leftmost column and input characters as the headers
-    @staticmethod
-    def load_table():
+    def load_table(self):
         # Load the CSV table
-        table = pd.read_csv('transition_table.csv')
+        self.transitionTable = pd.read_csv("StateTable.csv")
 
     # Function to get the next state based on the current state and input character
-    @staticmethod
-    def transition(current_state, input_char):
+    def transition(self, current_state, input_char):
+        if self.transitionTable is None:
+            self.load_table()
+            
         # Get the next state from the transition table
-        next_state = State.transitionTable.loc[current_state.name, input_char]
+        next_state = self.transitionTable.at[current_state.value, input_char]
 
         # If the next state is NaN, return the ERROR state
         if pd.isna(next_state):
             return State.ERROR
         else:
-            return State[next_state]
-
-    # Initialization
-    def __init__(self):
-        self.transitionTable = State.load_table()
+            return State(next_state)
 
     
