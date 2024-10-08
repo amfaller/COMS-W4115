@@ -75,7 +75,7 @@ class Transitions:
     def transition(self, current_state, input_char):
         if self.transitionTable is None:
             self.load_table()
-            
+
         # Get the next state from the transition table
         next_state = self.transitionTable.at[current_state.value, input_char]
 
@@ -84,5 +84,9 @@ class Transitions:
             return State.ERROR
         else:
             return State(next_state)
+
+    # Method to check if a state is an accepting state
+    def is_accepting(self, state):
+        return state in [State.DATATYPE, State.ID_END, State.TRUE_E, State.FALSE_E, State.EQUAL, State.INT, State.FLOAT, State.STRING_QUOTE_END, State.COMMENT_CURLY_BRACKET_END, State.NEWLINE]
 
     
