@@ -1,4 +1,6 @@
 # Programming Assignment 1
+Author: Tony Faller (UNI: af3370)
+
 This directory contains a scanner that processes an input source code written in the programming language that I designed. 
 
 ## Lexical Grammar
@@ -22,8 +24,6 @@ Input strings are parsed into the following token types:
 | STRING     | " [a-z]* "                | Each " represents a "double quote" charaacter                      |
 | COMMENT    | { [a-z A-Z 0-9 ' ']* }    | The ' ' represents whitespace                                      |
 | NEWLINE    | \n                        |                                                                    |
-
-
 
 ## Dependencies
 1. `python3 -m pip install pandas`
