@@ -94,4 +94,26 @@ class Transitions:
     def is_accepting(self, state):
         return state in [State.DATATYPE, State.ID_END, State.TRUE_E, State.FALSE_E, State.EQUAL, State.INT, State.FLOAT, State.STRING_QUOTE_END, State.COMMENT_CURLY_BRACKET_END, State.NEWLINE]
 
+    # Method to translate a state enum to a string
+    def state_to_string(self, state):
+        if state == State.DATATYPE:
+            return "DATATYPE"
+        elif state == State.ID_END:
+            return "ID"
+        elif state == State.TRUE_E:
+            return "TRUE"
+        elif state == State.FALSE_E:
+            return "FALSE"
+        elif state == State.EQUAL:
+            return "EQUAL"
+        elif state == State.INT:
+            return "INT"
+        elif state == State.FLOAT:
+            return "FLOAT"
+        elif state == State.STRING_QUOTE_END:
+            return "STRING"
+        elif state == State.COMMENT_CURLY_BRACKET_END:
+            return "COMMENT"
+        elif state == State.NEWLINE:
+            return "NEWLINE"
     
