@@ -116,4 +116,6 @@ class Transitions:
             return "COMMENT"
         elif state == State.NEWLINE:
             return "NEWLINE"
+        else:
+            return "ERROR"
     

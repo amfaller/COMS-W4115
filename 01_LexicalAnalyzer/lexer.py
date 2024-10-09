@@ -78,21 +78,40 @@ def lexer(inputString):
 # Top-level method called when the script is run
 def main():
 
-    testString = "!MyNvp.someOtherIntegerValue{Comment}=24"
-    print(f">> Testing string: {testString}")
-    lexer(testString)
-    print()
-
-    testString = "!MyNvp.someIntegerValue{}=5"
-    print(f">> Testing string: {testString}")
-    lexer(testString)
-    print()
-
     testString = "!MyNvp.enableSomeFunctionality{this is a boolean}=true"
     print(f">> Testing string: {testString}")
     lexer(testString)
     print()
 
+    testString = "@MyNvp.someIntegerValue{}=5"
+    print(f">> Testing string: {testString}")
+    lexer(testString)
+    print()
+
+    testString = "@MyNvp.someOtherIntegerValue{Comment}=24"
+    print(f">> Testing string: {testString}")
+    lexer(testString)
+    print()
+
+    testString = "#MyNvp.ThisIsAFloat{Comment}=3.14"
+    print(f">> Testing string: {testString}")
+    lexer(testString)
+    print()
+
+    testString = "$MyNvp.StringTest{}=\"This is a string\""
+    print(f">> Testing string: {testString}")
+    lexer(testString)
+    print()
+
+    testString = "This should produce errors"
+    print(f">> Testing string: {testString}")
+    lexer(testString)
+    print()
+
+    testString = "\"This should NOT produce any errors\""
+    print(f">> Testing string: {testString}")
+    lexer(testString)
+    print()
 
 if __name__ == "__main__":
     main()
