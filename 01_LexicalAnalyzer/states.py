@@ -77,7 +77,12 @@ class Transitions:
             self.load_table()
 
         # Get the next state from the transition table
-        next_state = self.transitionTable.at[current_state.value, input_char]
+        next_state = State.ERROR
+
+        try:
+            next_state = self.transitionTable.at[current_state.value, input_char]
+        except KeyError:
+            return State.ERROR
 
         # If the next state is NaN, return the ERROR state
         if pd.isna(next_state):

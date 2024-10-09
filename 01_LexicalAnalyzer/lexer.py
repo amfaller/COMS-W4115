@@ -14,7 +14,7 @@ def main():
     transitions = Transitions()
 
     # Test: Transition from INITIAL with character "!"
-    outState = transitions.transition(State.INITIAL, "!")
+    outState = transitions.transition(State.INITIAL, ">")
     print(outState) # Should print State.DATATYPE
 
 if __name__ == "__main__":
