@@ -13,6 +13,9 @@ def print_ast(node, depth=0):
 ###################
 # Common
 ###################
+def isDatatype(s):
+    return s == "DATATYPE"
+
 def isID(s):
     return s == "ID"
 
