@@ -13,7 +13,7 @@ For convenience, a Dockerfile is included in this directory. To execute the basi
 
 Alternatively, if the target environment has Python3.4 or later installed with the `pandas` package, one can simply execute:
 ```
-python3 lexer.py
+python3 main.py
 ```
 for the same effect. To install `pandas`, run:
 ```
