@@ -4,6 +4,12 @@
 # Helper methods for the parser.
 ###############################################################################
 
+# Define a method to print the AST
+def print_ast(node, depth=0):
+    print("  " * depth + f"{node.type}: {node.value}")
+    for child in node.children:
+        print_ast(child, depth + 1)
+
 ###################
 # Common
 ###################
