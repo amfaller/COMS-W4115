@@ -21,6 +21,9 @@ def lexer(inputString):
     state = State.INITIAL
     currentToken = ""
 
+    # Output list
+    output = []
+
     # Iterate through the input string
     strIdx = 0
     while strIdx < len(inputString):
@@ -44,6 +47,9 @@ def lexer(inputString):
                 # Need to backtrack by one character and print the token.
                 currentToken = currentToken[:-1]
                 print_output(state, currentToken)
+
+                # Push to output
+                output.append((transitions.state_to_string(state), currentToken))
 
                 # Reset the index to the removed character
                 strIdx -= 1
@@ -70,49 +76,19 @@ def lexer(inputString):
     # Print the final token if it's in an accepting state
     if transitions.is_accepting(state):
         print_output(state, currentToken)
+
+        # Push to output
+        output.append((transitions.state_to_string(state), currentToken))
+
     else:
         print_output(State.ERROR, currentToken)
+        output.append((transitions.state_to_string(State.ERROR), currentToken))
 
-    # TODO: Not sure if anything needs to be returned, since Programming Assignment 1
-    # only needs text output. This may need to be updated for Programming Assignment 2.
+    return output
 
 # Top-level method called when the script is run
 def main():
-
-    testString = "!MyNvp.enableSomeFunctionality{this is a boolean}=true"
-    print(f">> Testing string: {testString}")
-    lexer(testString)
-    print()
-
-    testString = "@MyNvp.someIntegerValue{}=5"
-    print(f">> Testing string: {testString}")
-    lexer(testString)
-    print()
-
-    testString = "@MyNvp.someOtherIntegerValue{Comment}=24"
-    print(f">> Testing string: {testString}")
-    lexer(testString)
-    print()
-
-    testString = "#MyNvp.ThisIsAFloat{Comment}=3.14"
-    print(f">> Testing string: {testString}")
-    lexer(testString)
-    print()
-
-    testString = "$MyNvp.StringTest{}=\"This is a string\""
-    print(f">> Testing string: {testString}")
-    lexer(testString)
-    print()
-
-    testString = "This should produce errors"
-    print(f">> Testing string: {testString}")
-    lexer(testString)
-    print()
-
-    testString = "\"This should NOT produce any errors\""
-    print(f">> Testing string: {testString}")
-    lexer(testString)
-    print()
+    print("This should not be called!")
 
 if __name__ == "__main__":
     main()
