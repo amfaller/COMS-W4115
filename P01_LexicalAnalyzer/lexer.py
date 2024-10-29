@@ -4,7 +4,8 @@
 # Top-level script for the lexical analyzer.
 ###############################################################################
 
-from states import State, Transitions
+from .states import State 
+from .states import Transitions
 
 # Global Transitions object
 transitions = Transitions()
