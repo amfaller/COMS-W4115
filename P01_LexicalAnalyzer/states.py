@@ -7,6 +7,7 @@
 
 from enum import Enum
 import pandas as pd
+import os
 
 class State(Enum):
     # Starting state
@@ -69,7 +70,9 @@ class Transitions:
     # This table has states in the leftmost column and input characters as the headers
     def load_table(self):
         # Load the CSV table
-        self.transitionTable = pd.read_csv("StateTable.csv")
+        currentDir = os.path.dirname(os.path.realpath(__file__))
+        csvPath = os.path.join(currentDir, "StateTable.csv")
+        self.transitionTable = pd.read_csv(csvPath)
 
     # Function to get the next state based on the current state and input character
     def transition(self, current_state, input_char):
