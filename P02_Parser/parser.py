@@ -102,7 +102,6 @@ class Parser:
 
             # Expect a value depending on the datatype
             if grammarPosition == 4:
-                print(f"dataType: {dataType}")
                 if dataType == 0:
                     if not isInt(self.tokens[self.idx][0]):
                         print(f"Error: Expected INT token, got {self.tokens[self.idx]}")

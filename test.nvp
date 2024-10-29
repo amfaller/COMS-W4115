@@ -1,0 +1,4 @@
+!test.ThisIsAnInteger{}=24
+@second.Identifier{float}=2.2
+#MyNvp.enableSomeFunctionality{this is a boolean}=true
+$Hey.ThisOneIsAString{comment}="Hello world"
