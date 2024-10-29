@@ -25,20 +25,7 @@ Input strings are parsed into the following tokens:
 | COMMENT    | { [a-z A-Z 0-9 ' ']* }    | The ' ' represents whitespace                                      |
 | NEWLINE    | \n                        |                                                                    |
 
-## Installation
-For convenience, a Dockerfile is included in this directory. To execute the basic lexer with sample inputs, perform the following:
-1. Install Docker
-2. Execute `docker build -t lexer-img .` to build the docker image
-3. Execute `docker run lexer-img` to run the container.
 
-Alternatively, if the target environment has Python3.4 or later installed with the `pandas` package, one can simply execute:
-```
-python3 lexer.py
-```
-for the same effect. To install `pandas`, run:
-```
-python3 -m pip install pandas
-```
 
 ## Sample Input/Output
 The following is expected when the Docker container is executed:
