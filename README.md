@@ -11,6 +11,9 @@ Please see [P01_LexicalAnalyzer/README.md](./P01_LexicalAnalyzer/README.md).
 ### Technical Write-Up
 Please see [P02_Parser/README.md](./P02_Parser/README.md).
 
+### Demo Video
+A demo video for Programming Assignment 2 is available [here](https://youtu.be/WvFzBS5Y88I).
+
 ## Installation
 For convenience, a Dockerfile is included in this directory. To execute the basic lexer with sample inputs, perform the following:
 1. Install Docker
