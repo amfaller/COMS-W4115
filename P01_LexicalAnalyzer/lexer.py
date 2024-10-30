@@ -43,6 +43,11 @@ def lexer(inputString):
         # If the next state is an error, check if the current state is accepting.
         if nextState == State.ERROR:
             if transitions.is_accepting(state):
+                # Check if the last character is "\n", which is added with a newline for processing.
+                # Remove it now.
+                if currentToken[-2:] == "\\n":
+                    currentToken = currentToken[:-1]
+
                 # If we're in an accepting state, it means that the current token is complete.
                 # Need to backtrack by one character and print the token.
                 currentToken = currentToken[:-1]
@@ -59,9 +64,7 @@ def lexer(inputString):
                 currentToken = ""
                 
             else:
-                # Log that this is an error
-                print_output(State.ERROR, currentToken)
-                # TODO: Not sure if any further handling is required here
+                raise Exception(f"Error: Invalid token encountered: {currentToken}")
 
             # Reset & continue
             state = State.INITIAL
@@ -81,8 +84,7 @@ def lexer(inputString):
         output.append((transitions.state_to_string(state), currentToken))
 
     else:
-        print_output(State.ERROR, currentToken)
-        output.append((transitions.state_to_string(State.ERROR), currentToken))
+        raise Exception(f"Error: Invalid token encountered: {currentToken}")
 
     return output
 
