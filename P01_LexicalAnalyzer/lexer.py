@@ -64,9 +64,7 @@ def lexer(inputString):
                 currentToken = ""
                 
             else:
-                # Log that this is an error
-                print_output(State.ERROR, currentToken)
-                # TODO: Not sure if any further handling is required here
+                raise Exception(f"Error: Invalid token encountered: {currentToken}")
 
             # Reset & continue
             state = State.INITIAL
@@ -86,8 +84,7 @@ def lexer(inputString):
         output.append((transitions.state_to_string(state), currentToken))
 
     else:
-        print_output(State.ERROR, currentToken)
-        output.append((transitions.state_to_string(State.ERROR), currentToken))
+        raise Exception(f"Error: Invalid token encountered: {currentToken}")
 
     return output
 

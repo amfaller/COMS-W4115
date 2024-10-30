@@ -26,8 +26,6 @@ class Parser:
         # Get the number of tokens
         numTokens = len(self.tokens)
 
-        
-
         # Position in the grammar:
         #  0 - datatype
         #  1 - ID
@@ -100,17 +98,16 @@ class Parser:
                         self.idx += 1
                         dataType = 3
                     else:
-                        print(f"Error: Unexpected token {token}")
+                        raise Exception("Error: Unexpected token")
                         return
                 else:
-                    print(f"Error: Unexpected token {token}")
+                    raise Exception("Error: Unexpected token")
                     return
                 
             # Expect an ID token next
             if grammarPosition == 1:
                 if not isID(self.tokens[self.idx][0]):
-                    print(f"Error: Expected ID token, got {self.tokens[self.idx]}")
-                    return
+                    raise Exception(f"Error: Expected ID token, got {self.tokens[self.idx]}")
                 else:
                     commonNode_ID.value = self.tokens[self.idx][1]
                     self.idx += 1
@@ -118,8 +115,7 @@ class Parser:
             # Now a comment
             if grammarPosition == 2:
                 if not isComment(self.tokens[self.idx][0]):
-                    print(f"Error: Expected COMMENT token, got {self.tokens[self.idx]}")
-                    return
+                    raise Exception(f"Error: Expected COMMENT token, got {self.tokens[self.idx]}")
                 else:
                     commonNode_COMMENT.value = self.tokens[self.idx][1]
                     self.idx += 1
@@ -127,8 +123,7 @@ class Parser:
             # Expect an operator
             if grammarPosition == 3:
                 if not isOperator(self.tokens[self.idx][0]):
-                    print(f"Error: Expected EQUAL token, got {self.tokens[self.idx]}")
-                    return
+                    raise Exception(f"Error: Expected EQUAL token, got {self.tokens[self.idx]}")
                 else:
                     commonNode_OPERATOR.value = self.tokens[self.idx][1]
                     self.idx += 1
@@ -137,32 +132,28 @@ class Parser:
             if grammarPosition == 4:
                 if dataType == 0:
                     if not isInt(self.tokens[self.idx][0]):
-                        print(f"Error: Expected INT token, got {self.tokens[self.idx]}")
-                        return
+                        raise Exception(f"Error: Expected INT token, got {self.tokens[self.idx]}")
                     else:
                         valueNode.type = "INT"
                         valueNode.value = self.tokens[self.idx][1]
                         self.idx += 1
                 elif dataType == 1:
                     if not isFloat(self.tokens[self.idx][0]):
-                        print(f"Error: Expected FLOAT token, got {self.tokens[self.idx]}")
-                        return
+                        raise Exception(f"Error: Expected FLOAT token, got {self.tokens[self.idx]}")
                     else:
                         valueNode.type = "FLOAT"
                         valueNode.value = self.tokens[self.idx][1]
                         self.idx += 1
                 elif dataType == 2:
                     if not isBool(self.tokens[self.idx][0]):
-                        print(f"Error: Expected BOOL token, got {self.tokens[self.idx]}")
-                        return
+                        raise Exception(f"Error: Expected BOOL token, got {self.tokens[self.idx]}")
                     else:
                         valueNode.type = "BOOL"
                         valueNode.value = self.tokens[self.idx][1]
                         self.idx += 1
                 elif dataType == 3:
                     if not isString(self.tokens[self.idx][0]):
-                        print(f"Error: Expected STRING token, got {self.tokens[self.idx]}")
-                        return
+                        raise Exception(f"Error: Expected STRING token, got {self.tokens[self.idx]}")
                     else:
                         valueNode.type = "STRING"
                         valueNode.value = self.tokens[self.idx][1]
@@ -171,8 +162,7 @@ class Parser:
             # Expect a newline
             if grammarPosition == 5:
                 if self.tokens[self.idx][0] and not isNewline(self.tokens[self.idx][0]):
-                    print(f"Error: Expected NEWLINE token, got {self.tokens[self.idx]}")
-                    return
+                    raise Exception(f"Error: Expected NEWLINE token, got {self.tokens[self.idx]}")
                 else:
                     newlineNode.value = self.tokens[self.idx][1]
                     self.idx += 1
@@ -182,9 +172,7 @@ class Parser:
 
         # When we're done iterating, we should be at grammar position 0
         if grammarPosition != 0:
-            print("Error: Unexpected end of input")
-            return
-
+            raise Exception("Error: Unexpected end of input")
 
     def parse(self, tokens):
         # Initialize the index to 0
@@ -197,10 +185,10 @@ class Parser:
         # Start parsing
         self.parse_root()
 
-        # Print the AST
-        print_ast(self.root)
-
         return self.root
+    
+    def print_ast(self):
+        print_ast(self.root)
 
 
 if __name__ == "__main__":

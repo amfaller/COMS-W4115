@@ -16,16 +16,20 @@ import P02_Parser.parser as parser
 
 # Function to execute the lexer & parser
 def execute(inputString):
-    # Token stream
-    print("Token stream:")
-    print("-------------")
-    tokenStream = lexer.lexer(inputString)
+    try:
+        # Token stream
+        print("Token stream:")
+        print("-------------")
+        tokenStream = lexer.lexer(inputString)
 
-    # Parse the token stream
-    print("\nAbstract Syntax Tree:")
-    print("---------------------")
-    myParser = parser.Parser()
-    myParser.parse(tokenStream)
+        # Parse the token stream
+        print("\nAbstract Syntax Tree:")
+        print("---------------------")
+        myParser = parser.Parser()
+        myParser.parse(tokenStream)
+        myParser.print_ast()
+    except Exception as e:
+        print(f"- FATAL: {e}")
 
 # Top-level function for the project
 def main():
