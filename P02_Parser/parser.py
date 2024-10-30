@@ -26,6 +26,8 @@ class Parser:
         # Get the number of tokens
         numTokens = len(self.tokens)
 
+        
+
         # Position in the grammar:
         #  0 - datatype
         #  1 - ID
@@ -47,23 +49,54 @@ class Parser:
             # Get the current token
             token = self.tokens[self.idx]
 
-            # Always expect the first token to be a datatype
             if grammarPosition == 0:
+                # Since we're parsing such a rigid grammar, we can easily
+                # determine the position of a given node in the AST based
+                # on the position in the grammar.
+                lineNode = Node("LINE", "")
+                dataTypeNode = Node("DATATYPE", "")
+                commonNode = Node("COMMON", "")
+                commonNode_ID = Node("ID", "")
+                commonNode_COMMENT = Node("COMMENT", "")
+                commonNode_OPERATOR = Node("OPERATOR", "")
+                valueNode = Node("VALUE", "")
+                newlineNode = Node("NEWLINE", "")
+
+                self.root.add_child(lineNode)
+
+                lineNode.add_child(dataTypeNode)
+                lineNode.add_child(commonNode)
+                lineNode.add_child(valueNode)
+                lineNode.add_child(newlineNode)
+
+                commonNode.add_child(commonNode_ID)
+                commonNode.add_child(commonNode_COMMENT)
+                commonNode.add_child(commonNode_OPERATOR)
+
+                # Always expect the first token to be a datatype
                 if isDatatype(token[0]):
                     if isDatatypeInt(token[1]):
-                        self.root.add_child(Node(token[0], token[1]))
+                        lineNode.type = "INT_LINE"
+                        dataTypeNode.type = "DATATYPE_INT"
+                        dataTypeNode.value = token[1]
                         self.idx += 1
                         dataType = 0
                     elif isDatatypeFloat(token[1]):
-                        self.root.add_child(Node(token[0], token[1]))
+                        lineNode.type = "FLOAT_LINE"
+                        dataTypeNode.type = "DATATYPE_FLOAT"
+                        dataTypeNode.value = token[1]
                         self.idx += 1
                         dataType = 1
                     elif isDatatypeBool(token[1]):
-                        self.root.add_child(Node(token[0], token[1]))
+                        lineNode.type = "BOOL_LINE"
+                        dataTypeNode.type = "DATATYPE_BOOL"
+                        dataTypeNode.value = token[1]
                         self.idx += 1
                         dataType = 2
                     elif isDatatypeString(token[1]):
-                        self.root.add_child(Node(token[0], token[1]))
+                        lineNode.type = "STRING_LINE"
+                        dataTypeNode.type = "DATATYPE_STRING"
+                        dataTypeNode.value = token[1]
                         self.idx += 1
                         dataType = 3
                     else:
@@ -79,7 +112,7 @@ class Parser:
                     print(f"Error: Expected ID token, got {self.tokens[self.idx]}")
                     return
                 else:
-                    self.root.add_child(Node("ID", self.tokens[self.idx][1]))
+                    commonNode_ID.value = self.tokens[self.idx][1]
                     self.idx += 1
 
             # Now a comment
@@ -88,7 +121,7 @@ class Parser:
                     print(f"Error: Expected COMMENT token, got {self.tokens[self.idx]}")
                     return
                 else:
-                    self.root.add_child(Node("COMMENT", self.tokens[self.idx][1]))
+                    commonNode_COMMENT.value = self.tokens[self.idx][1]
                     self.idx += 1
 
             # Expect an operator
@@ -97,7 +130,7 @@ class Parser:
                     print(f"Error: Expected EQUAL token, got {self.tokens[self.idx]}")
                     return
                 else:
-                    self.root.add_child(Node("EQUAL", self.tokens[self.idx][1]))
+                    commonNode_OPERATOR.value = self.tokens[self.idx][1]
                     self.idx += 1
 
             # Expect a value depending on the datatype
@@ -107,28 +140,32 @@ class Parser:
                         print(f"Error: Expected INT token, got {self.tokens[self.idx]}")
                         return
                     else:
-                        self.root.add_child(Node("INT", self.tokens[self.idx][1]))
+                        valueNode.type = "INT"
+                        valueNode.value = self.tokens[self.idx][1]
                         self.idx += 1
                 elif dataType == 1:
                     if not isFloat(self.tokens[self.idx][0]):
                         print(f"Error: Expected FLOAT token, got {self.tokens[self.idx]}")
                         return
                     else:
-                        self.root.add_child(Node("FLOAT", self.tokens[self.idx][1]))
+                        valueNode.type = "FLOAT"
+                        valueNode.value = self.tokens[self.idx][1]
                         self.idx += 1
                 elif dataType == 2:
                     if not isBool(self.tokens[self.idx][0]):
                         print(f"Error: Expected BOOL token, got {self.tokens[self.idx]}")
                         return
                     else:
-                        self.root.add_child(Node("BOOL", self.tokens[self.idx][1]))
+                        valueNode.type = "BOOL"
+                        valueNode.value = self.tokens[self.idx][1]
                         self.idx += 1
                 elif dataType == 3:
                     if not isString(self.tokens[self.idx][0]):
                         print(f"Error: Expected STRING token, got {self.tokens[self.idx]}")
                         return
                     else:
-                        self.root.add_child(Node("STRING", self.tokens[self.idx][1]))
+                        valueNode.type = "STRING"
+                        valueNode.value = self.tokens[self.idx][1]
                         self.idx += 1
 
             # Expect a newline
@@ -137,7 +174,7 @@ class Parser:
                     print(f"Error: Expected NEWLINE token, got {self.tokens[self.idx]}")
                     return
                 else:
-                    self.root.add_child(Node("NEWLINE", self.tokens[self.idx][1]))
+                    newlineNode.value = self.tokens[self.idx][1]
                     self.idx += 1
 
             # Move to the next position in the grammar
