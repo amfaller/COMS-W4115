@@ -12,4 +12,4 @@ RUN pip install --upgrade pip
 RUN pip install --trusted-host pypi.python.org -r requirements.txt
 
 # Define the command to execute the application
-CMD ["python", "main.py"]
+CMD ["python", "main.py", "test.nvp"]
