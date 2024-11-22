@@ -33,10 +33,11 @@ def execute(inputString):
         myParser.print_ast()
 
         # Generate the XML code
-        print("\nXML Code:")
-        print("---------")
+        print("\n")
         myGenerator = codeGen.Generator()
         myGenerator.generateCode(myParser.root)
+        myGenerator.printXml()
+        
     except Exception as e:
         print(f"- FATAL: {e}")
 

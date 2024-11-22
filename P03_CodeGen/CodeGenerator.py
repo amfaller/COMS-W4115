@@ -5,6 +5,12 @@
 ###############################################################################
 
 class Generator:
+    def printXml(self):
+        print("XML code:")
+        print("---------")
+        with open("output.xml", "r") as file:
+            print(file.read())
+
     def generateCode(self, rootOfAst):
         # Create an XML file
         xmlFile = open("output.xml", "w")
