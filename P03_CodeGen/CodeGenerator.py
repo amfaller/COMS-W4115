@@ -36,10 +36,18 @@ class Generator:
         commentString = node.children[1].children[1].value
         value = node.children[2].value
 
+        # The "Section" is everything in the ID before the .
+        section = idString.split(".")[0]
+
+        # The "ID" is everything in the ID after the .
+        idString = idString.split(".")[1]
+
         # Remove the {} from the comment string
         commentString = commentString[1:-1]
 
-        commentXmlLine = f"<!-- {commentString} -->"
-        valueXmlLine = f"<{idString} type='{typeString}'>{value}</{idString}>"
+        sectionStartLine = f"<{section}>"
+        commentXmlLine = f"\t<!-- {commentString} -->"
+        valueXmlLine = f"\t<{idString} type='{typeString}'>{value}</{idString}>"
+        sectionEndLine = f"</{section}>"
 
-        return f"{commentXmlLine}\n{valueXmlLine}\n"
+        return f"{sectionStartLine}\n{commentXmlLine}\n{valueXmlLine}\n{sectionEndLine}\n\n"
