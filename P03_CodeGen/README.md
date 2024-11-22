@@ -21,10 +21,6 @@ python3 main.py test.nvp
 
 And the effects of these value updates can be seen by running `./sample` _without_ rebuilding SampleClient.cpp.
 
-Alternatively, Docker can be used to execute this pipeline automatically:
-1. `docker build -t my-app .`
-2. `docker run --rm my-app`
-
 ## Considerations
 Any time a new entry is added to an NVP file, a corresponding XML query must be added to the C++ file which pulls in this value. This will require a rebuild of the C++ source code.
 

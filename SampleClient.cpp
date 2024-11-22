@@ -71,10 +71,10 @@ void readXml(const std::string& file)
     {
         XMLElement* mAkEs = OneMOre->FirstChildElement("mAkEs");
 
-        if (mAkEs && mAkEs->Attribute("type", "bool"))
+        if (mAkEs && mAkEs->Attribute("type", "int"))
         {
-            bool value = std::stoi(mAkEs->GetText());
-            std::cout << "OOneMOre.mAkEs: " << value << std::endl;
+            int value = std::stoi(mAkEs->GetText());
+            std::cout << "OneMOre.mAkEs: " << value << std::endl;
         }
     }
     
