@@ -5,7 +5,7 @@ This directory contains a code generator which accepts the Abstract Syntax Tree 
 
 The original goal of this language was to implement some mechanism by which `const` C++ variables could be modified between executions without needing to recompile the C++ source code. As one can imagine, C++ projects can become quite large, and recompilation can take quite a long time.
 
-This is accomplied by first translating the NVP syntax into an intermediate XML file, then parsing that XML file in C++. When values are modified in an NVP file, the XML file must be regenerated, but the C++ code need not be recompiled.
+This is accomplished by first translating the NVP syntax into an intermediate XML file, then parsing that XML file in C++. When values are modified in an NVP file, the XML file must be regenerated, but the C++ code need not be recompiled.
 
 ## Compilation Steps
 
