@@ -14,6 +14,13 @@ Please see [P02_Parser/README.md](./P02_Parser/README.md).
 ### Demo Video
 A demo video for Programming Assignment 2 is available [here](https://youtu.be/WvFzBS5Y88I).
 
+## Programming Assignment 3
+### Technical Write-Up
+Please see [P03_CodeGen/README.md](./P03_CodeGen/README.md).
+
+### Demo Video
+A demo video for Programming Assignment 3 is available [here](TODO). (TODO)
+
 ## Installation
 For convenience, a Dockerfile is included in this directory. To execute the basic lexer with sample inputs, perform the following:
 1. Install Docker
