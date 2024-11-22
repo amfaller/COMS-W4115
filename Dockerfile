@@ -7,9 +7,12 @@ WORKDIR /app
 # Copy the current directory contents into the container at /app
 COPY . /app
 
-# Install any needed packages specified in requirements.txt
+# Install any needed Python packages specified in requirements.txt
 RUN pip install --upgrade pip
 RUN pip install --trusted-host pypi.python.org -r requirements.txt
 
-# Define the command to execute the application
-CMD ["python", "main.py", "test.nvp"]
+# Install build tools (e.g., g++)
+RUN apt-get update && apt-get install -y g++ && apt-get clean
+
+# Define the default command to execute the steps in order
+CMD ["sh", "-c", "python main.py test.nvp && g++ SampleClient.cpp tinyxml2/tinyxml2.cpp -std=c++11 -o sample && ./sample"]

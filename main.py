@@ -14,6 +14,9 @@ import P01_LexicalAnalyzer.lexer as lexer
 # Import the parser
 import P02_Parser.parser as parser
 
+# Import the Code Generator
+import P03_CodeGen.CodeGenerator as codeGen
+
 # Function to execute the lexer & parser
 def execute(inputString):
     try:
@@ -28,6 +31,13 @@ def execute(inputString):
         myParser = parser.Parser()
         myParser.parse(tokenStream)
         myParser.print_ast()
+
+        # Generate the XML code
+        print("\n")
+        myGenerator = codeGen.Generator()
+        myGenerator.generateCode(myParser.root) # Creates output.xml
+        myGenerator.printXml()
+        
     except Exception as e:
         print(f"- FATAL: {e}")
 
