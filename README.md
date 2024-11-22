@@ -19,7 +19,7 @@ A demo video for Programming Assignment 2 is available [here](https://youtu.be/W
 Please see [P03_CodeGen/README.md](./P03_CodeGen/README.md).
 
 ### Demo Video
-A demo video for Programming Assignment 3 is available [here](TODO). (TODO)
+A demo video for Programming Assignment 3 is available [here](https://youtu.be/r8ntY0x_atw).
 
 ## Installation
 For convenience, a Dockerfile is included in this directory. To execute the basic lexer with sample inputs, perform the following:
