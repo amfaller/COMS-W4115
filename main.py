@@ -35,7 +35,7 @@ def execute(inputString):
         # Generate the XML code
         print("\n")
         myGenerator = codeGen.Generator()
-        myGenerator.generateCode(myParser.root)
+        myGenerator.generateCode(myParser.root) # Creates output.xml
         myGenerator.printXml()
         
     except Exception as e:
